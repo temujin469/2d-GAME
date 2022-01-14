@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #myCanvas{
+            background-color: #19aa009a;
+            display: block;
+        }
+        .sambar{
+            display: grid;
+            place-content: center;
+            z-index: 100;
+            width: 200px;
+            height: 50px;
+            background-color: coral;
+            position: absolute;
+            right: 10px;
+            top:10px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sambar">
+        <span>rock:<span id="rock">0</span></span>
+    </div>
+    <canvas id="myCanvas"></canvas>
+</body>
+<script src="game.js"></script>
+</html>

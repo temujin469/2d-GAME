@@ -13,7 +13,7 @@ player = {
     height:56,
     frameX:0,
     frameY:0,
-    speed:16,
+    speed:30,
     zam:0,
     moving:false,
     rockCount:0

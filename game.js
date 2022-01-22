@@ -42,7 +42,96 @@ class Rock {
     }
     
 }
-let hasRock = 0
+
+class Sum{
+    constructor(x,y,r,color,velocity){
+        this.x = x
+        this.y = y
+        this.r = r
+        this.color = color
+        this.velocity = velocity
+    }
+
+    draw(){
+        ctx.beginPath()
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2,false)
+        ctx.fillStyle = this.color
+        ctx.fill()
+    }
+
+    update(){
+        this.x = this.x + (this.velocity.x*10)
+        this.y = this.y + (this.velocity.y*10)
+    }
+}
+
+const sumnuud = []
+
+/* ----------------------------- throw the rock ----------------------------- */
+window.addEventListener("click",(e)=>{
+    const angle = Math.atan2(
+        e.clientX-player.x,
+        e.clientY- player.y
+    )
+    
+    const velocity ={
+        x:Math.sin(angle),
+        y:Math.cos(angle)
+    }
+
+    //sumniha toogr buudah
+    if(sumnuud.length<hasRock){
+        const sum = new Sum(player.x+20,player.y+30,7,"brown",velocity)
+        sumnuud.push(sum)
+    }
+})
+/* ------------------------------------ / ----------------------------------- */
+
+class Enemy{
+    constructor(x,y,r,color,velocity){
+        this.x = x
+        this.y = y
+        this.r = r
+        this.color = color
+        this.velocity = velocity
+    }
+
+    draw(){
+        ctx.beginPath()
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2,false)
+        ctx.fillStyle = this.color
+        ctx.fill()
+    }
+
+    update(){
+        this.x = this.x + (this.velocity.x*10)
+        this.y = this.y + (this.velocity.y*10)
+    }
+}
+
+// class {
+//     constructor(x,y,r,color,velocity){
+//         this.x = x
+//         this.y = y
+//         this.r = r
+//         this.color = color
+//         this.velocity = velocity
+//     }
+
+//     draw(){
+//         ctx.beginPath()
+//         ctx.arc(this.x,this.y,this.r,0,Math.PI*2,false)
+//         ctx.fillStyle = this.color
+//         ctx.fill()
+//     }
+
+//     update(){
+//         this.x = this.x + (this.velocity.x*10)
+//         this.y = this.y + (this.velocity.y*10)
+//     }
+// }
+
+let hasRock =0
 const rockCount = 10;
 const rocks = []
 for(let i=0;i<rockCount;i++){
@@ -69,6 +158,7 @@ function isCollision(obj1,obj2){
             obj1.y+obj1.height> obj2.y)
 }
 
+
 function animate(){
     ctx.clearRect(0,0,c.width,c.height)
     // ctx.drawImage(backround,0,0,w,h)
@@ -79,8 +169,14 @@ function animate(){
 
         if(isCollision(player,rock)){
             rocks.splice(index,1)
-            board.innerHTML = hasRock++
+            let th = hasRock+=1
+            board.innerHTML = th
         }
+    })
+
+    sumnuud.forEach(sum=>{
+        sum.draw()
+        sum.update()
     })
 
     drawChar(playerChar,player.width*player.frameX,player.height*player.frameY,player.width,player.height,player.x,player.y,player.width,player.height)
@@ -96,6 +192,8 @@ function animate(){
 }
 animate()
 
+
+
 // window.addEventListener('keydown',movePlayer)
 window.addEventListener('keydown',function(e){
     keys[e.keyCode] = true
@@ -107,14 +205,6 @@ window.addEventListener('keyup',function(e){
     player.moving = false
 })
 
-/* ----------------------------- throw the rock ----------------------------- */
-c.addEventListener("click",(e)=>{
-    // ctx.beginPath()
-    ctx.rect(c.width/2,c.height/2,20,20)
-    ctx.stroke()
-    console.log(e.clientX,e.clientY)
-})
-/* ------------------------------------ / ----------------------------------- */
 
 
 function movePlayer(){
@@ -139,5 +229,5 @@ function movePlayer(){
 
 function stepAnimate(){
     if(player.frameX<3 && player.moving) player.frameX++
-    else player.frameX = 0;
+    else player.frameX = 0; 
 }

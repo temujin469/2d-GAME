@@ -141,7 +141,7 @@ for(let i=0;i<rockCount;i++){
 // console.log(enemys)
 
 const playerChar = new Image()
-playerChar.src = "img/hulk.png"
+playerChar.src = "./img/hulk.png"
 
 // const backround = new Image()
 // backround.src = "img/jungle.jpg"
